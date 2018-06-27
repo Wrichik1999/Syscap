@@ -30,10 +30,10 @@ public class Main extends Application {
 	
 	private Tab charsets() {
 		Tab tab = new Tab("Character Sets");
+		VBox tabContent = new VBox();
 		ScrollPane pane = new ScrollPane();
 		pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 		pane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-		VBox tabContent = new VBox();
 		Button refresh = new Button("Refresh character sets");
 		Accordion accordion = new Accordion();
 		accordion.getPanes().setAll(getCharsetPanes());
@@ -41,14 +41,13 @@ public class Main extends Application {
 			accordion.getPanes().setAll(getCharsetPanes());
 			System.gc();
 		});
-		tabContent.getChildren()
-				.setAll(refresh, accordion);
-		tabContent.setAlignment(Pos.TOP_CENTER);
-		pane.setContent(tabContent);
-		pane.setFitToHeight(true);
+		pane.setContent(accordion);
 		pane.setFitToWidth(true);
+		tabContent.getChildren()
+				.setAll(refresh, pane);
+		tabContent.setAlignment(Pos.TOP_CENTER);
 		tab.setClosable(false);
-		tab.setContent(pane);
+		tab.setContent(tabContent);
 		System.gc();
 		return tab;
 	}
