@@ -60,7 +60,6 @@ public class Main extends Application {
 				.flatMap(charset -> Stream.concat(Stream.of(charset), charset.aliases().stream().map(Charset::forName)))
 				.distinct()
 				.sorted(Comparator.comparing(Charset::toString))
-				.filter(charset -> Charset.isSupported(charset.name()))
 				.map(entry -> new TitledPane(entry.toString(), new Button(entry.toString())))
 				.toArray(TitledPane[]::new);
 	}
